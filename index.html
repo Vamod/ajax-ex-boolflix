@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css\style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <title>Boolflix</title>
+    </head>
+    <body>
+        <div class="container">
+            <input type="text" id="myInput">
+            <button id="myButton">click</button>
+        </div>
+
+        <script id="entry-template" type="text/x-handlebars-template">
+            <ul class="entry">
+                <li>Titolo: {{title}}</li>
+                <li>Titolo originale: {{original_title}}</li>
+                <li>Lingua: {{original_language}}</li>
+                <li>Voto: {{vote_average}}</li>
+            </ul>
+        </script>
+
+
+
+
+        <script src="js\script.js" charset="utf-8"></script>
+    </body>
+</html>
