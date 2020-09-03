@@ -34,8 +34,9 @@ function insertMovie(data){
         },
         success: function(risposta){
         //     // console.log(risposta.results);
+            var film;
             if(risposta.total_results > 0){
-                print(risposta.results);
+                print(risposta.results, film);
             } else {
                 noResult();
             }
@@ -50,30 +51,30 @@ function insertMovie(data){
 }
 
 
-// insertTvSeries(data){
-//     $.ajax(
-//       {
-//         url: 'https://api.themoviedb.org/3/search/tv',
-//         method: 'GET',
-//         data:{
-//             api_key: 'e99307154c6dfb0b4750f6603256716d',
-//             language: 'it-IT',
-//             query: data
-//         },
-//         success: function(risposta){
-//         //     // console.log(risposta.results);
-//             if(risposta.total_results > 0){
-//                 print(risposta.results);
-//             } else {
-//                 noResult();
-//             }
-//         },
-//         error: function(){
-//           alert('errore!');
-//         }
-//       }
-//     );
-// }
+insertTvSeries(data){
+    $.ajax(
+      {
+        url: 'https://api.themoviedb.org/3/search/tv',
+        method: 'GET',
+        data:{
+            api_key: 'e99307154c6dfb0b4750f6603256716d',
+            language: 'it-IT',
+            query: data
+        },
+        success: function(risposta){
+        //     // console.log(risposta.results);
+            if(risposta.total_results > 0){
+                print(risposta.results);
+            } else {
+                noResult();
+            }
+        },
+        error: function(){
+          alert('errore!');
+        }
+      }
+    );
+}
 
 
 
@@ -81,7 +82,8 @@ function print(data, type){
     //il template lo metto fuori perchè non c'è bisogno di generarlo più volte nel ciclo
     var source = $("#entry-template").html();
     var template = Handlebars.compile(source);
-
+    var film;
+    var tv;
 
     for(var i = 0; i < data.length; i++){
         if(type == film){
