@@ -36,9 +36,8 @@ function insertMovie(data){
         },
         success: function(risposta){
         //     // console.log(risposta.results);
-            var film;
             if(risposta.total_results > 0){
-                print(risposta.results, film);
+                print(risposta.results, 'film');
             } else {
                 noResult();
             }
@@ -65,9 +64,8 @@ function insertTvSeries(data){
         },
         success: function(risposta){
             console.log(risposta.results);
-            var tv;
             if(risposta.total_results > 0){
-                print(risposta.results, tv);
+                print(risposta.results, 'tv');
             } else {
                 noResult();
             }
@@ -89,7 +87,7 @@ function print(data, genere){
     var tv;
 
     for(var i = 0; i < data.length; i++){
-        if(genere == film){
+        if(genere == 'film'){
             var context = {
                 title: data[i].title,
                 original_title: data[i].original_title,
@@ -97,8 +95,8 @@ function print(data, genere){
                 vote_average: stars(data[i].vote_average)
 
             };
-        } else if(genere == tv){
-            context = {
+        } else if(genere == 'tv'){
+            var context = {
                 title: data[i].name,
                 original_title: data[i].original_name,
                 original_language: flag(data[i].original_language),
