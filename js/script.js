@@ -5,28 +5,7 @@ $(document).ready(function(){
             var movie = $('#myInput').val();
             //per svuotare la ricerca precedente
             $('.movie-list').empty();
-
-
-            $.ajax(
-              {
-                url: 'https://api.themoviedb.org/3/search/movie',
-                method: 'GET',
-                data:{
-                    api_key: 'bb992b815f7bd546c69001e27b586501',
-                    language: 'it-IT',
-                    query: movie
-                },
-                success: function(risposta){
-                //     // console.log(risposta.results);
-
-                    print(risposta.results);
-
-                },
-                error: function(){
-                  alert('errore!');
-                }
-              }
-            );
+            insertMovie(movie);
         }
     });
 
@@ -34,28 +13,7 @@ $(document).ready(function(){
     $('#myButton').click(function(){
         var movie = $('#myInput').val();
         $('.movie-list').empty();
-
-
-        $.ajax(
-          {
-            url: 'https://api.themoviedb.org/3/search/movie',
-            method: 'GET',
-            data:{
-                api_key: 'bb992b815f7bd546c69001e27b586501',
-                language: 'it-IT',
-                query: movie
-            },
-            success: function(risposta){
-            //     // console.log(risposta.results);
-
-                print(risposta.results);
-
-            },
-            error: function(){
-              alert('errore!');
-            }
-          }
-        );
+        insertMovie(movie);
 
     });
 });
@@ -63,7 +21,36 @@ $(document).ready(function(){
 
 //funzioni
 
+function insertMovie(data){
+    $.ajax(
+      {
+        url: 'https://api.themoviedb.org/3/search/movie',
+        method: 'GET',
+        data:{
+            api_key: 'bb992b815f7bd546c69001e27b586501',
+            language: 'it-IT',
+            query: data
+        },
+        success: function(risposta){
+        //     // console.log(risposta.results);
+            if(risposta.total_results > 0){
+                print(risposta.results);
+            } else {
+                noResult();
+            }
+
+
+        },
+        error: function(){
+          alert('errore!');
+        }
+      }
+    );
+}
+
+
 function print(data){
+    //il template lo metto fuori perchè non c'è bisogno di generarlo più volte nel ciclo
     var source = $("#entry-template").html();
     var template = Handlebars.compile(source);
 
@@ -72,11 +59,36 @@ function print(data){
             title: data[i].title,
             original_title: data[i].original_title,
             original_language: data[i].original_language,
-            vote_average: data[i].vote_average
-        }
+            vote_average: stars(data[i].vote_average)
+        };
+
         var html = template(context);
         $('.movie-list').append(html);
     }
     //per pulire campo di input
     $('#myInput').val(' ');
+}
+
+function noResult(){
+    var source = $("#no-result-template").html();
+    var template = Handlebars.compile(source);
+    var context = {
+        noResult: 'Non ci sono risultati'
+    }
+    var html = template(context);
+    $('.movie-list').append(html);
+}
+
+function stars(num){
+    var num = Math.round(num / 2);
+    var star = '';
+    if(num > 0){
+    for(var i = 0; i < num; i++){
+        star = star + '<i class="fas fa-star"></i>';
+
+    }
+    } else {
+        star = 0 ;
+}
+    return star;
 }
