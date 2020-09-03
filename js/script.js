@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     //genero la lista dei film con l'enter
     $('#myInput').keydown(function(){
         if(event.which == 13 || event.keyCode == 13){
@@ -49,20 +50,58 @@ function insertMovie(data){
 }
 
 
-function print(data){
+// insertTvSeries(data){
+//     $.ajax(
+//       {
+//         url: 'https://api.themoviedb.org/3/search/tv',
+//         method: 'GET',
+//         data:{
+//             api_key: 'e99307154c6dfb0b4750f6603256716d',
+//             language: 'it-IT',
+//             query: data
+//         },
+//         success: function(risposta){
+//         //     // console.log(risposta.results);
+//             if(risposta.total_results > 0){
+//                 print(risposta.results);
+//             } else {
+//                 noResult();
+//             }
+//         },
+//         error: function(){
+//           alert('errore!');
+//         }
+//       }
+//     );
+// }
+
+
+
+function print(data, type){
     //il template lo metto fuori perchè non c'è bisogno di generarlo più volte nel ciclo
     var source = $("#entry-template").html();
     var template = Handlebars.compile(source);
 
+
     for(var i = 0; i < data.length; i++){
-        var context = {
-            title: data[i].title,
-            original_title: data[i].original_title,
-            original_language: flag(data[i].original_language),
-            vote_average: stars(data[i].vote_average)
+        if(type == film){
+            var context = {
+                title: data[i].title,
+                original_title: data[i].original_title,
+                original_language: flag(data[i].original_language),
+                vote_average: stars(data[i].vote_average)
+
+            };
+        } else if(type == tv){
+            var context = {
+                title: data[i].name,
+                original_title: data[i].original_name,
+                original_language: flag(data[i].original_language),
+                vote_average: stars(data[i].vote_average)
 
         };
-        
+    }
+
         var html = template(context);
         $('.movie-list').append(html);
     }
