@@ -1,5 +1,36 @@
 $(document).ready(function(){
+    //genero la lista dei film con l'enter
+    $('#myInput').keydown(function(){
+        if(event.which == 13 || event.keyCode == 13){
+            var movie = $('#myInput').val();
+            //per svuotare la ricerca precedente
+            $('.movie-list').empty();
 
+
+            $.ajax(
+              {
+                url: 'https://api.themoviedb.org/3/search/movie',
+                method: 'GET',
+                data:{
+                    api_key: 'bb992b815f7bd546c69001e27b586501',
+                    language: 'it-IT',
+                    query: movie
+                },
+                success: function(risposta){
+                //     // console.log(risposta.results);
+
+                    print(risposta.results);
+
+                },
+                error: function(){
+                  alert('errore!');
+                }
+              }
+            );
+        }
+    });
+
+    //genero la lista dei film al click del button
     $('#myButton').click(function(){
         var movie = $('#myInput').val();
         $('.movie-list').empty();
@@ -15,7 +46,7 @@ $(document).ready(function(){
                 query: movie
             },
             success: function(risposta){
-                // console.log(risposta.results);
+            //     // console.log(risposta.results);
 
                 print(risposta.results);
 
@@ -26,7 +57,7 @@ $(document).ready(function(){
           }
         );
 
-    })
+    });
 });
 
 
@@ -46,7 +77,6 @@ function print(data){
         var html = template(context);
         $('.movie-list').append(html);
     }
-
     //per pulire campo di input
     $('#myInput').val(' ');
 }
