@@ -60,8 +60,9 @@ function print(data){
             original_title: data[i].original_title,
             original_language: data[i].original_language,
             vote_average: stars(data[i].vote_average)
-        };
 
+        };
+            console.log(data[i].vote_average);
         var html = template(context);
         $('.movie-list').append(html);
     }
@@ -82,13 +83,16 @@ function noResult(){
 function stars(num){
     var num = Math.round(num / 2);
     var star = '';
-    if(num > 0){
-    for(var i = 0; i < num; i++){
-        star = star + '<i class="fas fa-star"></i>';
-
+    var starEmpty = '';
+    for(var i = 0; i < 5; i++){
+        if( i <= num){
+            star = star + '<i class="fas fa-star"></i>';
+        } else {
+            star = star + '<i class="far fa-star"></i>';
+        }
     }
-    } else {
-        star = 0 ;
-}
+
+
+
     return star;
 }
