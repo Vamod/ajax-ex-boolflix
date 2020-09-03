@@ -7,6 +7,7 @@ $(document).ready(function(){
             //per svuotare la ricerca precedente
             $('.movie-list').empty();
             insertMovie(movie);
+            insertTvSeries(movie);
         }
     });
 
@@ -15,6 +16,7 @@ $(document).ready(function(){
         var movie = $('#myInput').val();
         $('.movie-list').empty();
         insertMovie(movie);
+        insertTvSeries(movie);
 
     });
 });
@@ -51,7 +53,7 @@ function insertMovie(data){
 }
 
 
-insertTvSeries(data){
+function insertTvSeries(data){
     $.ajax(
       {
         url: 'https://api.themoviedb.org/3/search/tv',
@@ -62,9 +64,10 @@ insertTvSeries(data){
             query: data
         },
         success: function(risposta){
-        //     // console.log(risposta.results);
+            console.log(risposta.results);
+            var tv;
             if(risposta.total_results > 0){
-                print(risposta.results);
+                print(risposta.results, tv);
             } else {
                 noResult();
             }
@@ -78,7 +81,7 @@ insertTvSeries(data){
 
 
 
-function print(data, type){
+function print(data, genere){
     //il template lo metto fuori perchè non c'è bisogno di generarlo più volte nel ciclo
     var source = $("#entry-template").html();
     var template = Handlebars.compile(source);
@@ -86,7 +89,7 @@ function print(data, type){
     var tv;
 
     for(var i = 0; i < data.length; i++){
-        if(type == film){
+        if(genere == film){
             var context = {
                 title: data[i].title,
                 original_title: data[i].original_title,
@@ -94,16 +97,16 @@ function print(data, type){
                 vote_average: stars(data[i].vote_average)
 
             };
-        } else if(type == tv){
-            var context = {
+        } else if(genere == tv){
+            context = {
                 title: data[i].name,
                 original_title: data[i].original_name,
                 original_language: flag(data[i].original_language),
                 vote_average: stars(data[i].vote_average)
 
         };
-    }
 
+    }
         var html = template(context);
         $('.movie-list').append(html);
     }
