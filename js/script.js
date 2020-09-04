@@ -71,6 +71,7 @@ function print(data, genere){
                 genere: genere,
                 title: title,
                 original_title: original_title,
+                poster_path: findImage(data[i].poster_path),
                 original_language: flag(data[i].original_language),
                 vote_average: stars(data[i].vote_average)
 
@@ -137,6 +138,14 @@ function flag(lingua){
         return '<img src="img/' + lingua +'.png">';
     }
     return lingua;
+}
+
+function findImage(data){
+    var root = 'https://image.tmdb.org/t/p/w342';
+    var image = root + data;
+    if(data != null){
+    return '<img src="' + image + '">';
+    }
 }
 
 function reset(){
