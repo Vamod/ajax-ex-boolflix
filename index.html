@@ -12,11 +12,16 @@
         <div class="container">
             <input type="text" id="myInput" placeholder="Inserisci il titolo del film">
             <button id="myButton">click</button>
+            <h2>Film</h2>
             <div class="movie-list"></div>
+            <h2>Serie-tv</h2>
+            <div class="tv-series-list"></div>
+
         </div>
 
         <script id="entry-template" type="text/x-handlebars-template">
             <ul class="entry">
+                <li>Genere: {{genere}}</li>
                 <li>Titolo: {{title}}</li>
                 <li>Titolo originale: {{original_title}}</li>
                 <li class="lang-img">Lingua: {{{original_language}}}</li>
