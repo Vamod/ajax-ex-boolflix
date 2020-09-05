@@ -15,7 +15,7 @@
                     <h1 id="logo"><a href="">boolflix</a></h1>
                     <div id="search">
                         <input type="text" id="myInput" placeholder="Inserisci il titolo del film">
-                        <button id="myButton">click</button>
+                        <button id="myButton">Search</button>
                     </div>
                 </div>
             </header>
@@ -31,13 +31,16 @@
 
         <script id="entry-template" type="text/x-handlebars-template">
             <ul class="entry">
-                <li>Genere: {{genere}}</li>
-                <li>Titolo: {{title}}</li>
-                <li>Titolo originale: {{original_title}}</li>
-                <li class="poster">{{{poster_path}}}</li>
-                <li class="lang-img">Lingua: {{{original_language}}}</li>
-                <li>Voto: {{{vote_average}}}</li>
-                <li>Overview: {{overview}}</li>
+                <li class="poster">{{{poster_path}}}
+                    <ul class="overlay">
+                        <li class="titolo">Titolo: {{title}}</li>
+                        <li class="titolo_originale">Titolo originale: {{original_title}}</li>
+                        <li class="lang-img">Lingua: {{{original_language}}}</li>
+                        <li class="voto">Voto: {{{vote_average}}}</li>
+                        <li class="overview">Overview: {{overview}}</li>
+                        <li class="genere">Genere: {{genere}}</li>
+                    </ul>
+                </li>
             </ul>
         </script>
 

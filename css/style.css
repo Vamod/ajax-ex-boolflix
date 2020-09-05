@@ -62,19 +62,24 @@ header {
     display: flex;
 }
 
-.lang-img img {
-    height: 20px;
+ul.entry {
+    width: 250px;
+    height: 350px;
+    position: relative;
+    background-color: #0e0e0e;
+    list-style: none;
+    margin-right: 10px;
+
 }
 
-ul.entry {
-    list-style: none;
+ul.entry:hover ul.overlay {
+    opacity: 1;
+    transition:all 1s;
+
 }
 
 .poster {
-    margin-right: 10px;
-    width: 250px;
-    height: 350px;
-    background-color: #0e0e0e;
+    height: 100%;
 }
 
 .poster img {
@@ -85,4 +90,23 @@ ul.entry {
 .poster img[src="https://www.officinezambrano.it/s/cc_images/teaserbox_72447489.jpg?t=1548731397"]{
     height: 200px;
     filter: invert(100%);
+}
+
+ul.overlay {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 5px;
+    padding-left: 5px;
+    list-style: none;
+    background-color: black;
+    color: white;
+}
+
+.lang-img img {
+    height: 20px;
+    width: 25px;
 }
