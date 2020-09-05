@@ -38,7 +38,7 @@ function insertSearch(data, type, url){
         data:{
             api_key: 'bb992b815f7bd546c69001e27b586501',
             language: 'it-IT',
-            query: data
+            query: data,
         },
         success: function(risposta){
         //     // console.log(risposta.results);
@@ -74,28 +74,21 @@ function print(data, genere){
             var title = data[i].name;
             var original_title = data[i].original_name;
         }
-//per togliere il titolo originale se coincide col titolo
-        if(title == original_title){
-            var context = {
-                genere: genere,
-                title: 'Titolo' + ': ' + title,
-                poster_path: findImage(data[i].poster_path),
-                original_language: 'Lingua' + ': ' + flag(data[i].original_language),
-                vote_average: 'Voto' + ': ' +  stars(data[i].vote_average),
-                overview: 'Overview' + ': ' +  data[i].overview
-        };
-    }else {
+
+
         var context = {
             genere: genere,
             title: 'Titolo' + ': ' + title,
-            original_title: 'Titolo originale' + ': ' + original_title,
             poster_path: findImage(data[i].poster_path),
-            original_language: 'Lingua' + ': ' +  flag(data[i].original_language),
-            vote_average: 'Voto' + ': ' +   stars(data[i].vote_average),
-            overview: 'Overview' + ': ' +   data[i].overview
+            original_language: 'Lingua' + ': ' + flag(data[i].original_language),
+            vote_average: 'Voto' + ': ' +  stars(data[i].vote_average),
+            overview: 'Overview' + ': ' +  data[i].overview
         };
-
-    }
+        
+        //per togliere il titolo originale se coincide col titolo
+        if(title != original_title){
+            context.original_title = 'Titolo originale' + ': ' + original_title;
+        }
 
         var html = template(context);
         if(genere == 'film'){
