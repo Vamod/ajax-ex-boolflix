@@ -1,22 +1,28 @@
 $(document).ready(function(){
 
     //genero la lista dei film con l'enter
-    $('#myInput').keydown(function(){
+    $('#my-input').keydown(function(){
         if(event.which == 13 || event.keyCode == 13){
-            var inputQuery = $('#myInput').val();
+            var inputQuery = $('#my-input').val();
             //per svuotare la ricerca precedente
             reset();
-            insertSearch(inputQuery, 'film', 'movie');
-            insertSearch(inputQuery, 'tv', 'tv');
+            //controllo per evitare errore query
+            if (inputQuery != '') {
+                reset();
+                insertSearch(inputQuery, 'film', 'movie');
+                insertSearch(inputQuery, 'tv', 'tv');
+            }
         }
     });
 
     //genero la lista dei film al click del button
-    $('#myButton').click(function(){
-        var inputQuery = $('#myInput').val();
-        reset();
-        insertSearch(inputQuery, 'film', 'movie');
-        insertSearch(inputQuery, 'tv', 'tv');
+    $('#my-button').click(function(){
+        var inputQuery = $('#my-input').val();
+        if (inputQuery != '') {
+            reset();
+            insertSearch(inputQuery, 'film', 'movie');
+            insertSearch(inputQuery, 'tv', 'tv');
+        }
 
     });
 });
@@ -152,5 +158,5 @@ function findImage(data){
 function reset(){
     $('.movie-list').empty();
     $('.tv-series-list').empty();
-    $('#myInput').val('');
+    $('#my-input').val('');
 }
