@@ -70,12 +70,14 @@ header {
 .movie-list {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 30px;
 
 }
 
 .tv-series-list {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 30px;
 }
 
 h2.categoria {
@@ -101,13 +103,18 @@ ul.entry:hover ul.overlay {
 
 }
 
+ul.entry:hover li.genere {
+    opacity: 0;
+    transition: all 1s;
+}
+
 .poster {
     height: 100%;
 }
 
 .poster img {
     width: 100%;
-    height: 100%;
+    height: 90%;
 }
 
 .poster img[src="https://www.officinezambrano.it/s/cc_images/teaserbox_72447489.jpg?t=1548731397"]{
@@ -141,6 +148,16 @@ ul.overlay li {
 
 .voto i {
     color: yellow;
+}
+
+li.genere {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #e7111b;
+    display: block;
+
 }
 
 /* fine card */

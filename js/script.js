@@ -69,28 +69,41 @@ function print(data, genere){
         if(genere == 'film'){
             var title = data[i].title;
             var original_title = data[i].original_title;
+
         } else if(genere == 'tv'){
             var title = data[i].name;
             var original_title = data[i].original_name;
         }
+//per togliere il titolo originale se coincide col titolo
+        if(title == original_title){
             var context = {
                 genere: genere,
-                title: title,
-                original_title: original_title,
+                title: 'Titolo' + ': ' + title,
                 poster_path: findImage(data[i].poster_path),
-                original_language: flag(data[i].original_language),
-                vote_average: stars(data[i].vote_average),
-                overview: data[i].overview
+                original_language: 'Lingua' + ': ' + flag(data[i].original_language),
+                vote_average: 'Voto' + ': ' +  stars(data[i].vote_average),
+                overview: 'Overview' + ': ' +  data[i].overview
         };
+    }else {
+        var context = {
+            genere: genere,
+            title: 'Titolo' + ': ' + title,
+            original_title: 'Titolo originale' + ': ' + original_title,
+            poster_path: findImage(data[i].poster_path),
+            original_language: 'Lingua' + ': ' +  flag(data[i].original_language),
+            vote_average: 'Voto' + ': ' +   stars(data[i].vote_average),
+            overview: 'Overview' + ': ' +   data[i].overview
+        };
+
+    }
 
         var html = template(context);
         if(genere == 'film'){
             $('.movie-list').append(html);
         } else if (genere == 'tv') {
             $('.tv-series-list').append(html);
-        }
+        };
     }
-    //per pulire campo di input
 
 }
 

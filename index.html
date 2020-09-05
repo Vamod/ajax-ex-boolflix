@@ -20,12 +20,8 @@
                 </div>
             </header>
             <div class="container">
-
-                <h2 class="categoria">Film</h2>
                 <div class="movie-list"></div>
-                <h2  class="categoria">Serie-tv</h2>
                 <div class="tv-series-list"></div>
-
             </div>
         </div>
 
@@ -33,13 +29,14 @@
             <ul class="entry">
                 <li class="poster">{{{poster_path}}}
                     <ul class="overlay">
-                        <li class="titolo">Titolo: {{title}}</li>
-                        <li class="titolo_originale">Titolo originale: {{original_title}}</li>
-                        <li class="lang-img">Lingua: {{{original_language}}}</li>
-                        <li class="voto">Voto: {{{vote_average}}}</li>
-                        <li class="overview">Overview: {{overview}}</li>
-                        <li class="genere">Genere: {{genere}}</li>
+                        <li class="titolo">{{title}}</li>
+                        <li class="titolo_originale">{{original_title}}</li>
+                        <li class="lang-img">{{{original_language}}}</li>
+                        <li class="voto">{{{vote_average}}}</li>
+                        <li class="overview">{{overview}}</li>
                     </ul>
+                    <li class="genere">Genere: {{genere}}</li>
+
                 </li>
             </ul>
         </script>
