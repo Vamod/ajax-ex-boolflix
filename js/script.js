@@ -73,8 +73,8 @@ function print(data, genere){
                 original_title: original_title,
                 poster_path: findImage(data[i].poster_path),
                 original_language: flag(data[i].original_language),
-                vote_average: stars(data[i].vote_average)
-
+                vote_average: stars(data[i].vote_average),
+                overview: data[i].overview
         };
 
         var html = template(context);
@@ -146,6 +146,7 @@ function findImage(data){
     if(data != null){
     return '<img src="' + image + '">';
     }
+    return '<img src="https://www.officinezambrano.it/s/cc_images/teaserbox_72447489.jpg?t=1548731397">';
 }
 
 function reset(){

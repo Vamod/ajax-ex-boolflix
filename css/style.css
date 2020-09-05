@@ -1,3 +1,88 @@
+/* reset */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*contenitori*/
+.mega-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: #1b1b1b;
+}
+
+header {
+    height: 70px;
+    width: 100%;
+    background-color: black;
+
+}
+
+.header-container {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    min-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    min-width: 1200px;
+    margin: 0 auto;
+
+
+}
+
+/* fine contenitori */
+
+/* header */
+
+#logo a {
+    text-transform: uppercase;
+    color: #e7111b;
+    text-decoration: none;
+}
+
+/* fine header */
+
+/* container */
+
+.movie-list {
+    display: flex;
+
+}
+
+.tv-series-list {
+    display: flex;
+}
+
 .lang-img img {
     height: 20px;
+}
+
+ul.entry {
+    list-style: none;
+}
+
+.poster {
+    margin-right: 10px;
+    width: 250px;
+    height: 350px;
+    background-color: #0e0e0e;
+}
+
+.poster img {
+    width: 250px;
+    height: 100%;
+}
+
+.poster img[src="https://www.officinezambrano.it/s/cc_images/teaserbox_72447489.jpg?t=1548731397"]{
+    height: 200px;
+    filter: invert(100%);
 }
