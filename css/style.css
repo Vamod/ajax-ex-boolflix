@@ -122,6 +122,7 @@ ul.entry:hover li.genere {
     filter: invert(100%);
 }
 
+
 ul.overlay {
     height: 100%;
     width: 100%;
@@ -129,9 +130,7 @@ ul.overlay {
     position: absolute;
     top: 0;
     left: 0;
-    overflow-y: scroll;
-    padding-top: 5px;
-    padding-left: 5px;
+    padding: 5px;
     list-style: none;
     background-color: black;
     color: white;

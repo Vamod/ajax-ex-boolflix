@@ -27,7 +27,7 @@
 
         <script id="entry-template" type="text/x-handlebars-template">
             <ul class="entry">
-                <li class="poster">{{{poster_path}}}
+                <li class="poster"><img src="{{poster_path}}" alt="{{title}}">
                     <ul class="overlay">
                         <li class="titolo">{{title}}</li>
                         <li class="titolo_originale">{{original_title}}</li>
@@ -35,7 +35,7 @@
                         <li class="voto">{{{vote_average}}}</li>
                         <li class="overview">{{overview}}</li>
                     </ul>
-                    <li class="genere">Genere: {{genere}}</li>
+                <li class="genere">Genere: {{genere}}</li>
 
                 </li>
             </ul>

@@ -3,27 +3,13 @@ $(document).ready(function(){
     //genero la lista dei film con l'enter
     $('#my-input').keydown(function(){
         if(event.which == 13 || event.keyCode == 13){
-            var inputQuery = $('#my-input').val();
-            //per svuotare la ricerca precedente
-            reset();
-            //controllo per evitare errore query
-            if (inputQuery != '') {
-                reset();
-                insertSearch(inputQuery, 'film', 'movie');
-                insertSearch(inputQuery, 'tv', 'tv');
-            }
+            init();
         }
     });
 
     //genero la lista dei film al click del button
     $('#my-button').click(function(){
-        var inputQuery = $('#my-input').val();
-        if (inputQuery != '') {
-            reset();
-            insertSearch(inputQuery, 'film', 'movie');
-            insertSearch(inputQuery, 'tv', 'tv');
-        }
-
+        init();
     });
 });
 
@@ -57,7 +43,15 @@ function insertSearch(data, type, url){
     );
 }
 
-
+function init(){
+    var inputQuery = $('#my-input').val();
+    //controllo per evitare errore query
+    if (inputQuery != '') {
+        reset();
+        insertSearch(inputQuery, 'film', 'movie');
+        insertSearch(inputQuery, 'tv', 'tv');
+    }
+}
 
 
 function print(data, genere){
@@ -82,9 +76,9 @@ function print(data, genere){
             poster_path: findImage(data[i].poster_path),
             original_language: 'Lingua' + ': ' + flag(data[i].original_language),
             vote_average: 'Voto' + ': ' +  stars(data[i].vote_average),
-            overview: 'Overview' + ': ' +  data[i].overview
+            overview: 'Overview' + ': ' +  data[i].overview.substring(0, 200)+ '[...]'
         };
-        
+
         //per togliere il titolo originale se coincide col titolo
         if(title != original_title){
             context.original_title = 'Titolo originale' + ': ' + original_title;
@@ -97,9 +91,8 @@ function print(data, genere){
             $('.tv-series-list').append(html);
         };
     }
-
 }
-
+//funzione nel caso in cui non ci fossero risultati
 function noResult(genere){
     var source = $("#no-result-template").html();
     var template = Handlebars.compile(source);
@@ -115,6 +108,7 @@ function noResult(genere){
 
 }
 
+//funzione che trasforma il voto in stelle ranking
 function stars(num){
     var resto = num % 2;
     num = Math.floor(num / 2);
@@ -133,17 +127,7 @@ function stars(num){
     return star;
 }
 
-// function flag(stringa){
-//     if(stringa == 'it'){
-//         stringa = '<img src="img/it.png" alt="">';
-//     } else if(stringa == 'en'){
-//         stringa = '<img src="img/en.png" alt="">';
-//     }
-//     return stringa
-// }
 
-//soluzione Cristina
-//più veloce per aggiungere altre bandiere nel array
 function flag(lingua){
     var language = ['en', 'it'];
     if(language.includes(lingua)){
@@ -156,9 +140,9 @@ function findImage(data){
     var root = 'https://image.tmdb.org/t/p/w342';
     var image = root + data;
     if(data != null){
-    return '<img src="' + image + '">';
+    return image;
     }
-    return '<img src="https://www.officinezambrano.it/s/cc_images/teaserbox_72447489.jpg?t=1548731397">';
+    return 'https://www.officinezambrano.it/s/cc_images/teaserbox_72447489.jpg?t=1548731397';
 }
 
 function reset(){
