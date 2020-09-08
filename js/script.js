@@ -165,11 +165,50 @@ function getDetails(type, id){
             var genere = risposta.genres;
             var attori = risposta.credits.cast;
             console.log(attori);
+            printDetails(id, genere, attori);
         },
         error: function(){
           alert('errore!');
         }
     });
+}
+
+function printDetails(filmId, genres, cast){
+    var castList ='';
+    var len = cast.length;
+    if(len > 5){
+        len = 5;
+    }
+
+    for(var i = 0; i < len; i++){
+        var nameActor = cast[i].name;
+        castList += nameActor;
+        //se non sono all'ultimo aggiungo la virgola
+        if(i !== len - 1){
+            castList += ', ';
+        }
+    }
+    console.log(castList);
+
+    var generiList = '';
+    for (var i = 0; i < genres.length; i++) {
+        var genere = genres[i].name;
+        generiList += genere;
+        if(i !== genres.length - 1){
+            generiList += ', ';
+        }
+    }
+    var source = $("#entry-template-details").html();
+    var template = Handlebars.compile(source);
+    var context = {
+        actors:'Attori: ' + castList,
+        genres:'Genere: ' + generiList
+    };
+
+    var html = template(context);
+    $('.entry[data-id="' + filmId + '"]').find('.dettagli').append(html);
+
+
 }
 
 function reset(){

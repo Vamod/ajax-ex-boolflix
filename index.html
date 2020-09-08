@@ -27,7 +27,7 @@
         </div>
 
         <script id="entry-template" type="text/x-handlebars-template">
-            <ul class="entry">
+            <ul class="entry" data-id={{id}} data-genere={{genere}}>
                 <li class="poster"><img src="{{poster_path}}" alt="{{title}}">
                     <ul class="overlay">
                         <li class="titolo">{{title}}</li>
@@ -35,6 +35,7 @@
                         <li class="lang-img">{{{original_language}}}</li>
                         <li class="voto">{{{vote_average}}}</li>
                         <li class="overview">{{overview}}</li>
+                        <li class="dettagli"></li>
                     </ul>
                 <li class="genere">Genere: {{genere}}</li>
 
@@ -45,6 +46,13 @@
         <script id="no-result-template" type="text/x-handlebars-template">
             <div>{{noResult}}</div>
         </script>
+
+        <script id="entry-template-details" type="text/x-handlebars-template">
+            <p>{{actors}}</p>
+            <p>{{genres}}</p>
+        </script>
+
+
 
         <script src="js\script.js" charset="utf-8"></script>
     </body>
