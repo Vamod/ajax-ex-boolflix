@@ -63,12 +63,16 @@ function print(data, genere){
         if(genere == 'film'){
             var title = data[i].title;
             var original_title = data[i].original_title;
+            var tipo = 'movie';
 
         } else if(genere == 'tv'){
             var title = data[i].name;
             var original_title = data[i].original_name;
+            var tipo = 'tv';
         }
 
+        var id = data[i].id;
+        console.log(id);
 
         var context = {
             genere: genere,
@@ -76,7 +80,8 @@ function print(data, genere){
             poster_path: findImage(data[i].poster_path),
             original_language: 'Lingua' + ': ' + flag(data[i].original_language),
             vote_average: 'Voto' + ': ' +  stars(data[i].vote_average),
-            overview: 'Overview' + ': ' +  data[i].overview.substring(0, 200)+ '[...]'
+            overview: 'Overview' + ': ' +  data[i].overview.substring(0, 250)+ '[...]',
+            id: id
         };
 
         //per togliere il titolo originale se coincide col titolo
@@ -89,7 +94,8 @@ function print(data, genere){
             $('.movie-list').append(html);
         } else if (genere == 'tv') {
             $('.tv-series-list').append(html);
-        };
+        }
+        getDetails(tipo, id);
     }
 }
 //funzione nel caso in cui non ci fossero risultati
@@ -143,6 +149,27 @@ function findImage(data){
     return image;
     }
     return 'https://www.officinezambrano.it/s/cc_images/teaserbox_72447489.jpg?t=1548731397';
+}
+
+function getDetails(type, id){
+    var url = 'https://api.themoviedb.org/3/' + type + '/' + id;
+    $.ajax({
+        url: url,
+        method: 'GET',
+        data: {
+            api_key: 'bb992b815f7bd546c69001e27b586501',
+            language: 'it-IT',
+            append_to_response: 'credits'
+        },
+        success: function(risposta){
+            var genere = risposta.genres;
+            var attori = risposta.credits.cast;
+            console.log(attori);
+        },
+        error: function(){
+          alert('errore!');
+        }
+    });
 }
 
 function reset(){
