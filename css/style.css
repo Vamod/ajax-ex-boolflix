@@ -14,21 +14,23 @@ body {
 
 /*contenitori*/
 .mega-container {
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
     background-color: #1b1b1b;
+    min-height: 100vh;
 }
 
 header {
     height: 70px;
     width: 100%;
     background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
 
 }
 
 .header-container {
-    width: 90%;
+    width: 90vw;
     height: 100%;
     margin: 0 auto;
     min-width: 1200px;
@@ -38,6 +40,7 @@ header {
 }
 
 .container {
+    margin-top: 70px;
     width: 90vw;
     min-width: 1200px;
     margin: 0 auto;
@@ -48,27 +51,71 @@ header {
 /* fine contenitori */
 
 /* header */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
 
 #logo a {
     text-transform: uppercase;
     color: #e7111b;
     text-decoration: none;
+    margin-right: 20px;
+}
+
+#menu{
+    list-style: none;
+    display: flex;   
+    color: white;
+}
+
+#menu li{
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+#open-search {
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
 }
 
 #my-button {
+    display: none;
     margin-left: 10px;
-    padding: 2px 10px;
+    padding: 5px 12px;
     background-color: transparent;
     color: #e7111b;
     border-radius: 10px;
-    border-color: #e7111b;
-
+    border: 3px solid #e7111b;
+    cursor: pointer;
 }
+
 
 #my-input {
-    padding: 2px 8px;
+    /* display: none; */
+    display: inline-block;
+    width: 0px;
     border-radius: 10px;
+    border: none;
+    -webkit-transition-duration: 0.8s;
 }
+
+#my-input.active {
+    /* display: inline-block; */
+    width: 160px;
+    -webkit-transition-duration: 0.8s;
+    padding: 5px 12px;
+}
+
+
+
+#my-input:focus {
+    outline: none;
+}
+
 
 /* fine header */
 
@@ -77,13 +124,16 @@ header {
 .movie-list {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 30px;
+    padding-top: 100px;
+    color: red;
 
 }
 
 .tv-series-list {
     display: flex;
     flex-wrap: wrap;
+    color: red;
+    padding-bottom: 30px;
 }
 
 h2.categoria {
@@ -93,7 +143,7 @@ h2.categoria {
 /* card */
 
 ul.entry {
-    width: calc((90vw - 25px) / 5);
+    width: calc((90vw - 20px) / 5);
     height: 400px;
     position: relative;
     background-color: #0e0e0e;
@@ -104,9 +154,16 @@ ul.entry {
 
 }
 
+ul.entry:nth-child(5n){
+    margin-right: 0;
+}
+
 ul.entry:hover ul.overlay {
     opacity: 1;
-    transition:all 0.5s;
+    transform: scale(1.1);
+    transition: all 0.5s;
+    cursor: pointer;
+    z-index: 1;
 
 }
 
@@ -153,7 +210,7 @@ ul.overlay li {
 }
 
 .voto i {
-    color: yellow;
+    color: rgb(247, 205, 21);
 }
 
 li.genere {
@@ -166,5 +223,7 @@ li.genere {
     text-transform: capitalize;
 
 }
+
+
 
 /* fine card */

@@ -1,20 +1,57 @@
 $(document).ready(function(){
-
+    initWithoutSearch();
+    $('#open-search').click(function(){
+        $('#my-input').toggleClass('active', 1000);
+        $('#my-input').focus();
+        init();
+    })
     //genero la lista dei film con l'enter
     $('#my-input').keydown(function(){
         if(event.which == 13 || event.keyCode == 13){
-            init();
+            $('#my-input').toggleClass('active', 1000);
+            init();         
         }
     });
 
-    //genero la lista dei film al click del button
-    $('#my-button').click(function(){
-        init();
-    });
+    $('#home').click(function(){
+        $('.movie-list').show();
+        $('.tv-series-list').show();
+        $('.tv-series-list').css('padding-top', '0px');
+    })
+
+    $('#filtro-serie').click(function(){
+        $('.movie-list').hide();
+        $('.tv-series-list').css('padding-top', '100px');
+        if($('.tv-series-list').hide()){
+            $('.tv-series-list').show()
+        }
+    })
+
+    $('#filtro-film').click(function(){
+        $('.tv-series-list').hide();
+        if($('.movie-list').hide()){
+             $('.movie-list').show();
+        }
+    })
 });
 
 
 //funzioni
+
+function init(){
+    var inputQuery = $('#my-input').val();
+    //controllo per evitare errore query
+    if (inputQuery != '') {
+        reset();
+        insertSearch(inputQuery, 'film', 'movie');
+        insertSearch(inputQuery, 'tv', 'tv');
+    }
+}
+
+function initWithoutSearch(){
+    insertSearch('dark', 'film', 'movie');
+    insertSearch('dark', 'tv', 'tv');
+}
 
 function insertSearch(data, type, url){
     $.ajax(
@@ -27,7 +64,6 @@ function insertSearch(data, type, url){
             query: data,
         },
         success: function(risposta){
-        //     // console.log(risposta.results);
             if(risposta.total_results > 0){
                 print(risposta.results, type);
             } else {
@@ -43,15 +79,7 @@ function insertSearch(data, type, url){
     );
 }
 
-function init(){
-    var inputQuery = $('#my-input').val();
-    //controllo per evitare errore query
-    if (inputQuery != '') {
-        reset();
-        insertSearch(inputQuery, 'film', 'movie');
-        insertSearch(inputQuery, 'tv', 'tv');
-    }
-}
+
 
 
 function print(data, genere){
@@ -72,7 +100,7 @@ function print(data, genere){
         }
 
         var id = data[i].id;
-        console.log(id);
+        // console.log(id);
 
         var context = {
             genere: genere,
@@ -103,7 +131,7 @@ function noResult(genere){
     var source = $("#no-result-template").html();
     var template = Handlebars.compile(source);
     var context = {
-        noResult: 'Non ci sono risultati'
+        noResult: `Non ci sono risultati ${genere}`
     }
     var html = template(context);
     if (genere == 'tv') {
@@ -164,7 +192,7 @@ function getDetails(type, id){
         success: function(risposta){
             var genere = risposta.genres;
             var attori = risposta.credits.cast;
-            console.log(attori);
+            // console.log(attori);
             printDetails(id, genere, attori);
         },
         error: function(){
@@ -188,7 +216,7 @@ function printDetails(filmId, genres, cast){
             castList += ', ';
         }
     }
-    console.log(castList);
+    // console.log(castList);
 
     var generiList = '';
     for (var i = 0; i < genres.length; i++) {
